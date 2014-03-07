@@ -14,11 +14,13 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "syntax/core": "*"
+        "syntax/core": ">=2"
     },
     "autoload": {
         "classmap": [
             "src/controllers",
+            "src/database/migrations",
+            "src/database/seeds",
             "src/models",
             "src/node",
             "src/views"

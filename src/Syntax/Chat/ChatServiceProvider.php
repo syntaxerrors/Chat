@@ -1,4 +1,4 @@
-<?php namespace Syntax\Core;
+<?php namespace Syntax\Chat;
 
 use Illuminate\Support\ServiceProvider;
 

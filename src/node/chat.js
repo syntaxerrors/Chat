@@ -5,13 +5,14 @@ var fs         = require("fs");
 var io         = require("socket.io");
 var httpsync   = require("httpsync");
 var path       = require('path');
-var configDir  = '../config/packages/syntax/core/';
-var log        = fs.createWriteStream('../storage/logs/node.txt', {'flags': 'a'});
+var configDir  = '../../../../../app/config/packages/syntax/chat/';
+// var log        = fs.createWriteStream('../storage/logs/node.txt', {'flags': 'a'});
 
 /**
  * Configure the application
  */
 try {
+	// console.log(path.resolve(__dirname, configDir, 'chatConfig.json'));
 	if (!fs.existsSync(path.resolve(__dirname, configDir, 'chatConfig.json'))) {
 		throw "Configuration file does not exist.";
 	}
