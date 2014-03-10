@@ -1,0 +1,43 @@
+#!/bin/bash
+#node chat management
+#wrote by Michael "Like A Boss!" Cox  3/9/2014
+#comments or questions, feel free to go fuck yourself.
+
+#functions
+
+function Start_Serv {
+node chat.js &>/dev/null &
+}
+
+
+while [ 1 ]
+    do 
+    eval STATEofPID=`cat ./ChatPID`
+
+    #echo $STATEofPID
+
+    if [ -n "$STATEofPID" ] ; then
+        if [ "$STATEofPID" != "STOP" ] ;then 
+            if [ "$STATEofPID" != "STOPPED" ] ; then
+                eval SoP=$(ps -p`echo $STATEofPID` -o "%p %a"|awk '{if(NR==2 && /node/&& $3 ~ /chat.js/){print $1}} END {{if(NR<2)print "NADDA"}}')
+                if [ "$SoP" == "NADDA" ] ; then
+                    #echo "Pid listed not found."
+                    echo "" > ./ChatPID
+                fi
+            fi
+        fi
+        if [ "$STATEofPID" == "STOP" ] && [ -n "$LP" ] ; then
+            kill -9 $LP
+            echo "STOPPED" > ./ChatPID
+        fi
+    fi
+
+    if [ -z "$STATEofPID" ] ; then
+        #echo "STATEofPID was empty"
+        Start_Serv
+        echo $! > ./ChatPID
+        LP=$!
+    fi
+
+    sleep 5
+done
