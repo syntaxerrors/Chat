@@ -29,11 +29,8 @@ class ChatServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->shareWithApp();
-		// $this->registerAlias();
 		$this->loadConfig();
 		$this->registerViews();
-		// $this->activateProfiler();
-		// $this->registerProfilerRouting();
 	}
 
 	/**
