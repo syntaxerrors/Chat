@@ -31,6 +31,7 @@ class ChatServiceProvider extends ServiceProvider {
 		$this->shareWithApp();
 		$this->loadConfig();
 		$this->registerViews();
+		$this->registerAliases();
 	}
 
 	/**
@@ -64,6 +65,31 @@ class ChatServiceProvider extends ServiceProvider {
 	protected function registerViews()
 	{
 		$this->app['view']->addNamespace('chat', __DIR__.'/../../../views');
+	}
+
+	/**
+	 * Register aliases
+	 *
+	 * @return void
+	 */
+	protected function registerAliases()
+	{
+		$aliases = [
+			'Chat'                        => 'Syntax\Core\Chat', 
+			'Chat_Room'                   => 'Syntax\Core\Chat_Room',
+		];
+
+		$appAliases = \Config::get('core::nonCoreAliases');
+
+		foreach ($aliases as $alias => $class) {
+			if (!is_null($appAliases)) {
+				if (!in_array($alias, $appAliases)) {
+					\Illuminate\Foundation\AliasLoader::getInstance()->alias($alias, $class);
+				}
+			} else {
+				\Illuminate\Foundation\AliasLoader::getInstance()->alias($alias, $class);
+			}
+		}
 	}
 
 	/**
