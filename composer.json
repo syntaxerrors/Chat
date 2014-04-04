@@ -18,11 +18,14 @@
     },
     "autoload": {
         "classmap": [
+            "src/commands",
             "src/controllers",
             "src/database/migrations",
             "src/database/seeds",
             "src/models",
             "src/node",
+            "src/presenters",
+            "src/services",
             "src/views"
         ],
         "psr-0": {
